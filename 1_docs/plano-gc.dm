@@ -1,0 +1,1 @@
+arquivo para a gerencia de configuração
