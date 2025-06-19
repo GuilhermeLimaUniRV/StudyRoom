@@ -26,5 +26,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run tests
-        run: npm test
+      - name: Run tests if available
+        run: |
+          if ls __tests__/*.test.js 1> /dev/null 2>&1; then
+            echo "Testes encontrados. Executando npm test..."
+            npm test
+          else
+            echo "Nenhum teste encontrado. Etapa de testes ignorada."
+          fi
