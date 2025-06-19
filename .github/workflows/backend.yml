@@ -16,17 +16,18 @@ jobs:
         working-directory: backend
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout do código
+        uses: actions/checkout@v3
 
-      - name: Setup Node.js
+      - name: Setup do Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
 
-      - name: Install dependencies
+      - name: Instala dependências
         run: npm install
 
-      - name: Run tests if available
+      - name: Executa testes se existirem
         run: |
           if ls __tests__/*.test.js 1> /dev/null 2>&1; then
             echo "Testes encontrados. Executando npm test..."
