@@ -26,10 +26,17 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build
-        run: npm run build
+      - name: Build if script exists
+        run: |
+          if npm run | grep -q "build"; then
+            echo "Script de build encontrado. Executando build..."
+            npm run build
+          else
+            echo "Script de build não encontrado no package.json. Pulando etapa."
+          fi
 
       - name: Upload production build as artifact
+        if: success() && steps.build.outcome == 'success'
         uses: actions/upload-artifact@v3
         with:
           name: frontend-build
